@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">LoL Team</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="login">Entrar</string>
+    <string name="usuari">Nombre de usuario :</string>
+    <string name="contrasena">Contraseña :</string>
+    <string name="Registrarse">Registrarse</string>
+    <string name="Enviar">Enviar</string>
+    <string name="Cancelar">Cancelar</string>
+    <string name="Posicion">Posicion (opcional) :</string>
+    <string name="title_activity_splash_screen">MainActivity</string>
+
+</resources>
