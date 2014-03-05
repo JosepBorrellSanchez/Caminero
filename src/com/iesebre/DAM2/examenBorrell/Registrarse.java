@@ -2,6 +2,7 @@ package com.iesebre.DAM2.examenBorrell;
 
 
 import android.app.Activity;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,19 +19,22 @@ import android.widget.Toast;
 
 public class Registrarse extends Activity {
 	private TextView lblMensaje;
-	private Spinner posicions;
+	private Spinner position;
 	private SQLiteDatabase db;
 	private EditText password;
-	private EditText nom;
+	private EditText username;
 	private Button registrarse;
-
+	private Button cancelar;
+	LoginDataBaseAdapter loginDataBaseAdapter;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.registrarse);
-        
-        posicions = (Spinner)findViewById(R.id.posicions);
-        nom = (EditText)findViewById(R.id.editText1);
+       
+        loginDataBaseAdapter=new LoginDataBaseAdapter(this);
+        loginDataBaseAdapter=loginDataBaseAdapter.open();
+        position = (Spinner)findViewById(R.id.posicions);
+        username = (EditText)findViewById(R.id.editText1);
         password = (EditText)findViewById(R.id.editText2);
         
         final String[] datos =
@@ -45,7 +49,7 @@ public class Registrarse extends Activity {
         adaptador.setDropDownViewResource(
                 android.R.layout.simple_spinner_dropdown_item);
          
-        posicions.setAdapter(adaptador);
+        position.setAdapter(adaptador);
         Basededades bd =
 	            new Basededades(this, "DBUsuaris", null, 1);
 	    		Log.i("missatge","feta correctament");
@@ -57,13 +61,27 @@ public class Registrarse extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				String sql = "INSERT INTO Usuaris (nombreusuario,password,posicion) VALUES ('" + nom + "','" + password + "','" + posicions.getSelectedItem().toString() + "') ";
-				db.execSQL(sql);
+				//String sql = "INSERT INTO Usuaris (nombreusuario,password,posicion) VALUES ('" + usernom + "','" + password + "','" + positions.getSelectedItem().toString() + "') ";
+				String Susername = username.getText().toString();  
+				String Spassword = password.getText().toString();  
+				String Sposition = position.getSelectedItem().toString();  
+				loginDataBaseAdapter.insertEntry(Susername, Spassword, Sposition);
 			Toast toast = Toast.makeText(Registrarse.this, "S'ha registrat correctament", 5);
 				toast.show();
+				Intent intent = new Intent(Registrarse.this, Adaptadors.class);
+	            startActivity(intent);
 			}
 		});
-        };
+        
+        cancelar = (Button)findViewById(R.id.cancelar);
+        cancelar.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Registrarse.this.finish();
+			}
+        });
+        }
     
 
     @Override

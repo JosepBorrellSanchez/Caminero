@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 @SuppressLint("NewApi")
 public class Basededades extends SQLiteOpenHelper {
 	
-	 String sqlCreate = "CREATE TABLE Usuaris (codi INTEGER AUTO INCREMENT, nombreusuario TEXT, password TEXT, posicion TEXT)";
+	 //String sqlCreate = "CREATE TABLE Usuaris (codi INTEGER AUTO INCREMENT, nombreusuario TEXT, password TEXT, posicion TEXT)";
 
 	public Basededades(Context context, String name, CursorFactory factory,
 			int version) {
@@ -27,13 +27,13 @@ public class Basededades extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		// TODO Auto-generated method stub
-		db.execSQL(sqlCreate);
+		db.execSQL(LoginDataBaseAdapter.DATABASE_CREATE);
 	}
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		db.execSQL("DROP TABLE IF EXISTS Usuaris");
-		db.execSQL(sqlCreate);
+		db.execSQL(LoginDataBaseAdapter.DATABASE_CREATE);
 
 	}
 

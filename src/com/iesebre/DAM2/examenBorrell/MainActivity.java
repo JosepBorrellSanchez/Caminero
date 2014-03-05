@@ -17,15 +17,19 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	
-	private ControlLogin ctlLogin;
+	private Button login;
 	private Button registrarse;
 	private SQLiteDatabase db;
+	 LoginDataBaseAdapter loginDataBaseAdapter;
 		@Override
 		public void onCreate(Bundle savedInstanceState)
 		{
+			 loginDataBaseAdapter=new LoginDataBaseAdapter(this);
+	         loginDataBaseAdapter=loginDataBaseAdapter.open();
 			 Basededades bd =
 			            new Basededades(this, "DBUsuaris", null, 1);
 			    		Log.i("missatge","feta correctament");
@@ -33,24 +37,48 @@ public class MainActivity extends Activity {
 		    super.onCreate(savedInstanceState);
 		    setContentView(R.layout.activity_main);
 		    
-		    registrarse =(Button)findViewById(R.id.registrarse);
-		    ctlLogin = (ControlLogin)findViewById(R.id.CtlLogin);
-		   
-		    ctlLogin.setOnLoginListener(new OnLoginListener()
+		    login =(Button)findViewById(R.id.login);
+		    registrarse = (Button)findViewById(R.id.registrarse);
+
+		    login.setOnClickListener(new View.OnClickListener() 
 		    {
 		    @Override
-		    public void onLogin(String usuario, String password)
-		    {
-		        //Validamos el usuario y la contrase�a
-		        if (usuario.equals("dam") && password.equals("dam")) {
+		    public void onClick(View v) {
+                // get The User name and Password
+		    	
+		    	 final  EditText editTextUserName=(EditText)findViewById(R.id.TxtUsuario);
+		         final  EditText editTextPassword=(EditText)findViewById(R.id.TxtPassword);
+                String userName=editTextUserName.getText().toString();
+                String password=editTextPassword.getText().toString();
+
+                // fetch the Password form database for respective user name
+                String storedPassword=loginDataBaseAdapter.getSinlgeEntry(userName);
+
+                // check if the Stored password matches with  Password entered by user
+                if(password.equals(storedPassword))
+                {
+                    Toast.makeText(MainActivity.this, "Congrats: Login Successfull", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(MainActivity.this, Adaptadors.class);
+    	            startActivity(intent);
+                }
+                else
+                {
+                    Toast.makeText(MainActivity.this, "User Name or Password does not match", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+		    
+		    
+                
+		       /* if (usuario.equals("dam") && password.equals("dam")) {
 		            ctlLogin.setMensaje("Login correcto, entrando a tu equipo");
 		            Intent i = new Intent(MainActivity.this, Adaptadors.class);
                     startActivity(i);
 		        }
 		        else
 		            ctlLogin.setMensaje("Usuario o contraseña incorrectos");
-		    }
-		    });
+		    }*/
+		   
 		
 		    registrarse.setOnClickListener(new OnClickListener()
 		    {
