@@ -56,6 +56,8 @@ public class Registrarse extends Activity {
 	        db = bd.getWritableDatabase();
         
         registrarse = (Button)findViewById(R.id.registrarse);
+        
+        
         registrarse.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -64,12 +66,20 @@ public class Registrarse extends Activity {
 				//String sql = "INSERT INTO Usuaris (nombreusuario,password,posicion) VALUES ('" + usernom + "','" + password + "','" + positions.getSelectedItem().toString() + "') ";
 				String Susername = username.getText().toString();  
 				String Spassword = password.getText().toString();  
-				String Sposition = position.getSelectedItem().toString();  
-				loginDataBaseAdapter.insertEntry(Susername, Spassword, Sposition);
-			Toast toast = Toast.makeText(Registrarse.this, "S'ha registrat correctament", 5);
-				toast.show();
-				Intent intent = new Intent(Registrarse.this, Adaptadors.class);
-	            startActivity(intent);
+				String Sposition = position.getSelectedItem().toString(); 
+				
+				if (!Susername.equals("") || !Spassword.equals("")){
+					loginDataBaseAdapter.insertEntry(Susername, Spassword, Sposition);
+					Toast toast = Toast.makeText(Registrarse.this, "S'ha registrat correctament", 5);
+						toast.show();
+						Intent intent = new Intent(Registrarse.this, Adaptadors.class);
+			            startActivity(intent);
+					
+				}
+				else{
+					Toast toast = Toast.makeText(Registrarse.this, "Por favor, introduce un nombre de usuario y una contraseña", 5);
+					toast.show();
+				}
 			}
 		});
         

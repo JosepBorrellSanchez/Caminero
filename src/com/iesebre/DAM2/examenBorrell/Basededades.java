@@ -2,6 +2,7 @@ package com.iesebre.DAM2.examenBorrell;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
@@ -36,6 +37,12 @@ public class Basededades extends SQLiteOpenHelper {
 		db.execSQL(LoginDataBaseAdapter.DATABASE_CREATE);
 
 	}
+	
+	public Cursor llistarUsuaris(){
+		 SQLiteDatabase db = getReadableDatabase();
+		  
+		 return db.rawQuery("SELECT ID AS _id, USERNAME AS name, POSITIONS FROM Usuaris;", null);  
+		}
 
 	/**
 	 * @param args

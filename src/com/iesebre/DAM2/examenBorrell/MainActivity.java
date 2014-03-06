@@ -51,19 +51,23 @@ public class MainActivity extends Activity {
                 String userName=editTextUserName.getText().toString();
                 String password=editTextPassword.getText().toString();
 
+                if (!userName.equals("") || !password.equals("")){
                 // fetch the Password form database for respective user name
                 String storedPassword=loginDataBaseAdapter.getSinlgeEntry(userName);
-
                 // check if the Stored password matches with  Password entered by user
                 if(password.equals(storedPassword))
                 {
-                    Toast.makeText(MainActivity.this, "Congrats: Login Successfull", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this, "Bienvenido", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(MainActivity.this, Adaptadors.class);
     	            startActivity(intent);
                 }
                 else
                 {
-                    Toast.makeText(MainActivity.this, "User Name or Password does not match", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this, "Usuario o contraseña incorrectos", Toast.LENGTH_LONG).show();
+                }
+                }
+                else{
+                	Toast.makeText(MainActivity.this, "No puedes dejar en blanco los campos", Toast.LENGTH_LONG).show();
                 }
             }
         });

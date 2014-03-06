@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lo que escribas aqui debajo les llegará a los miembros de tu equipo, por favor, se breve" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView1"
+        android:layout_marginTop="14dp"
+        android:text="Escribe :" />
+
+    <EditText
+        android:id="@+id/textnotificacio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView2"
+        android:layout_marginTop="19dp"
+        android:ems="10" />
+
+    <Button
+        android:id="@+id/enviarnotificacio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textnotificacio"
+        android:layout_marginTop="56dp"
+        android:layout_toRightOf="@+id/textView2"
+        android:text="Enviar" />
+
+    <Button
+        android:id="@+id/cancelar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/enviarnotificacio"
+        android:layout_alignBottom="@+id/enviarnotificacio"
+        android:layout_marginLeft="41dp"
+        android:layout_toRightOf="@+id/enviarnotificacio"
+        android:text="Atras" />
+
+</RelativeLayout>

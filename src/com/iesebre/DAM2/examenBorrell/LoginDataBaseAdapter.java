@@ -21,6 +21,7 @@ public class LoginDataBaseAdapter
 		private final Context context;
 		// Database open/upgrade helper
 		private Basededades dbHelper;
+		public String nomdusuari = null;
 		public  LoginDataBaseAdapter(Context _context) 
 		{
 			context = _context;
@@ -80,9 +81,10 @@ public class LoginDataBaseAdapter
 			ContentValues updatedValues = new ContentValues();
 			// Assign values for each row.
 			updatedValues.put("USERNAME", Susername);
+			
 			updatedValues.put("PASSWORD",Spassword);
 			updatedValues.put("POSITION", Sposition);
-
+			nomdusuari = Susername;
 	        String where="USERNAME = ?";
 		    db.update("Usuaris",updatedValues, where, new String[]{Susername});			   
 		}		

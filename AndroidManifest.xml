@@ -26,6 +26,8 @@
         </activity>
         <activity android:name="com.iesebre.DAM2.examenBorrell.Registrarse" >
         </activity>
+        <activity android:name="com.iesebre.DAM2.examenBorrell.Notificacio" >
+        </activity>
     </application>
 
 </manifest>
